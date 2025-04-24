@@ -5,10 +5,10 @@ document.documentElement.style.setProperty("--pageHeight", fullPageHeight + "px"
 for (let i = 0; i < pearlNumber; i++) {
   const pearl = document.createElement("div");
   pearl.classList.add("pearl");
-  pearl.style.left = Math.random() * 100 + "vw"; // random position (in view widths)
-  pearl.style.animationDuration = (3 + Math.random() * 3) + "s"; //between 3 and 6!
+  pearl.style.left = (10 + Math.random() * (80)) + 'vw'; 
+  pearl.style.animationDuration = (4 + Math.random() * 3) + "s"; //between 4 and 7!
   pearl.style.animationDelay = Math.random() * 5 + "s"; 
-  const bobaColors = [
+  const bobaColours = [
     '#a4e1f3',
     '#ad3c3a',
     '#fc8707',
@@ -20,8 +20,8 @@ for (let i = 0; i < pearlNumber; i++) {
     '#7f78ba',
     '#270b0b'  
   ];
-  const baseColor = bobaColors[Math.floor(Math.random() * bobaColors.length)];
-  pearl.style.background = `radial-gradient(circle at 30% 30%, ${lighten(baseColor, 0.7)}, ${baseColor})`;  
+  const baseColour = bobaColours[Math.floor(Math.random() * bobaColours.length)];
+  pearl.style.background = `radial-gradient(circle at 30% 30%, ${lighten(baseColour, 0.7)}, ${baseColour})`;  
   document.body.appendChild(pearl);
 }
 function lighten(hex, percent) {
@@ -74,8 +74,9 @@ rainButton.addEventListener('click', () => {
     const sprinkle = document.createElement('div');
     sprinkle.classList.add('sprinkle');
 
-    const randomLeft = 35 + Math.random() * (30);
-    sprinkle.style.left = randomLeft + 'vw';    sprinkle.style.backgroundColor = getRandomColor();
+    const randomLeft = 25 + Math.random() * (48);
+    sprinkle.style.left = randomLeft + 'vw';    
+    sprinkle.style.backgroundColor = getRandomColour();
 
     const randomRotation = Math.floor(Math.random() * 181) - 90;
     sprinkle.style.setProperty('--initial-rotation', `${randomRotation}deg`);
@@ -89,22 +90,25 @@ rainButton.addEventListener('click', () => {
       const sprinkleRect = sprinkle.getBoundingClientRect();
       const imageRect = toppingsImage.getBoundingClientRect();
 
-      if (sprinkleRect.bottom >= imageRect.top+10) {
+      if (sprinkleRect.bottom >= imageRect.top+35) {
         sprinkle.remove();
-        toppingsImage.src = 'sprinkles-title.png';
+        toppingsImage.src = 'media/sprinkles-title.png';
         clearInterval(checkInterval);
       }
     }, 16);
 
-    setTimeout(() => {
-      sprinkle.remove();
-      clearInterval(checkInterval);
-    }, fallDuration * 1000);
   }
 });
 
-function getRandomColor() {
-  const pastelColors = ['#ff9aa2', '#C67FBE', '#793C61', '#f6c1c7', '#e38a95', '#ff80c1'];
-  return pastelColors[Math.floor(Math.random() * pastelColors.length)];
+function getRandomColour() {
+  const sprinkleColours = ['#ff9aa2', '#C67FBE', '#793C61', '#f6c1c7', '#e38a95', '#ff80c1'];
+  return sprinkleColours[Math.floor(Math.random() * sprinkleColours.length)];
 }
 
+document.getElementById('arrow').addEventListener('click', () => {
+  window.scrollTo({
+    top: window.innerHeight,
+    left: 0,
+    behavior: 'smooth'
+  });
+});
